@@ -3,8 +3,8 @@ import React from "react";
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="NavBar">
-        <h3>Home</h3>
+      <div className="navBar">
+        <h2>Home</h2>
       </div>
     );
   }

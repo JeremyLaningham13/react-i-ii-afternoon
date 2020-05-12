@@ -1,42 +1,39 @@
-import React from "react";
-import data from "././data";
+import React, { Component } from "react";
 
-class Info extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      employees: data,
-      position: 0
-    };
-  }
+export default class info extends Component {
   render() {
-    var inter = this.state.employees;
-    var index = this.state.position;
-    var currentCard = inter[index];
-    var movies = inter[index].favoriteMovies.map(element => <li>{element}</li>);
-
-    let mappedData = this.state.employees.map(val => val.id);
+    let movies = this.props.favoriteMovies.map(element => <li>{element}</li>);
+    let name = `${this.props.name.first} ${this.props.name.last}`;
     return (
-      <section>
-        <main>
-          <div className="Info">
-            {/* <h3>{mappedData}</h3> */}
-            <h2>
-              {currentCard.name.first} {currentCard.name.last}
-            </h2>
-            <h3>
-              From: {currentCard.city} {currentCard.country}
-            </h3>
-            <h3>Employer: {currentCard.employer}</h3>
-            <h3>Title: {currentCard.title}</h3>
-            <br></br>
-            <h3>Favorite Movies: </h3>
-            <ol>{movies}</ol>
+      <div>
+        <div className="name">
+          <span className="name_line">{name}</span>
+        </div>
+        <div className="main-info">
+          <div>
+            <span>From:</span>
+            {this.props.city}
           </div>
-        </main>
-      </section>
+          <div>
+            <span>Job Title:</span>
+            {this.props.title}
+          </div>
+          <div>
+            <span>Employer:</span>
+            {this.props.employer}
+          </div>
+        </div>
+
+        <div>
+          <h2>Favorite Movies:</h2>
+          <ol>{movies}</ol>
+        </div>
+        <div className="pageNumber">
+          <div>
+            {this.props.id}
+          </div>
+        </div>
+      </div>
     );
   }
 }
-
-export default Info;

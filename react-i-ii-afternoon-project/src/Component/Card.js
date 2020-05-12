@@ -1,17 +1,58 @@
-import React from "react";
+import React, { Component } from "react";
+import Info from "./Info";
+import data from "./data";
 
-class Card extends React.Component {
+export default class card extends Component {
+  constructor() {
+    super();
+    this.state = {
+      people: data,
+      index: 0
+    };
+  }
+  increment = () => {
+    if (this.state.index < this.state.people.length - 1) {
+      this.setState({ index: this.state.index + 1 });
+    } else {
+      this.setState({ index: 0 });
+    }
+  };
   render() {
+    let { people, index } = this.state;
+
     return (
-      <div className="Card">
-        <div>
-          <button className="Button_1">Edit</button>
-          <button className="Button_2">Delete</button>
-          <button className="Button_3">New</button>
+      <div className="card_wrapper">
+        <div className="card">
+          <Info
+            name={people[index].name}
+            id={people[index].id}
+            city={people[index].city}
+            employer={people[index].employer}
+            title={people[index].title}
+            favoriteMovies={people[index].favoriteMovies}
+          />
+        </div>
+        <div className="button-wrap">
+          <a
+            onClick={() => {
+              if (index !== 0) {
+                this.setState({ index: index - 1 });
+              }
+            }}
+            className="arrow_button"
+          >
+            <span>&#60; Previous</span>
+          </a>
+          <div>
+            <button className="button">Edit</button>
+            <button className="button">Delete</button>
+            <button className="button">New</button>
+          </div>
+          <a className="arrow_button" onClick={this.increment}>
+            <span>Next &#62; </span>
+          </a>
         </div>
       </div>
     );
   }
 }
-
-export default Card;
